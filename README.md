@@ -4,6 +4,10 @@ A responsive Product Listing Page (PLP) developed as part of the Appscrip Fronte
 
 The application is built with Next.js and recreates the provided Figma design with responsive layouts, product filtering, sorting, wishlist interaction, API integration, and SEO considerations.
 
+## Live Demo
+
+https://appscrip-task-terence-jones.vercel.app
+
 ## Features
 
 - Responsive Product Listing Page
@@ -19,7 +23,7 @@ The application is built with Next.js and recreates the provided Figma design wi
 - Semantic HTML structure
 - SEO metadata and structured data
 - Product image alt text for accessibility
-- Server-rendered/pre-rendered product content using Next.js
+- Pre-rendered page structure with client-side product data fetching
 
 ## Tech Stack
 
@@ -42,7 +46,9 @@ The API provides product information such as title, category, price, description
 
 The project uses the Next.js App Router.
 
-Product data is fetched in an async Server Component and the resulting page is pre-rendered by Next.js. Interactive functionality such as filtering, sorting, wishlist actions, and responsive controls is handled using React Client Components.
+The main page structure is pre-rendered by Next.js. Product data is fetched client-side from the Fake Store API because the API returns HTTP 403 for server-side requests from the deployment environment.
+
+Interactive functionality such as filtering, sorting, wishlist actions, and responsive controls is handled using React Client Components.
 
 ## SEO
 
@@ -53,7 +59,7 @@ The project includes:
 - Semantic heading structure
 - Product image alt attributes
 - Search engine indexing directives
-- JSON-LD structured data using Schema.org `ItemList` and `Product` schemas
+- JSON-LD structured data using Schema.org `CollectionPage`
 
 ## Responsive Design
 
