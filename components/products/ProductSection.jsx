@@ -1,11 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FilterSidebar from "./FilterSidebar";
 import ProductGrid from "./ProductGrid";
 
-export default function ProductSection({ products }) {
+export default function ProductSection() {
   const [showFilter, setShowFilter] = useState(true);
+  const [products, setProducts] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(false);
+
+useEffect(() => {
+  async function fetchProducts() {
+    try {
+      const response = await fetch(
+        "https://fakestoreapi.com/products"
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch products: ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+
+      setProducts(data);
+    } catch (error) {
+      console.error("Product fetch failed:", error);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  fetchProducts();
+}, []);
   const [showMobileFilter, setShowMobileFilter] =
     useState(false);
 
@@ -188,14 +218,22 @@ export default function ProductSection({ products }) {
         )}
 
         <div
-          className={`product-grid-wrapper ${
-            showFilter ? "" : "filter-hidden"
-          }`}
-        >
-          <ProductGrid
-            products={sortedProducts}
-          />
-        </div>
+  className={`product-grid-wrapper ${
+    showFilter ? "" : "filter-hidden"
+  }`}
+>
+  {loading ? (
+    <p className="product-status">
+      Loading products...
+    </p>
+  ) : error ? (
+    <p className="product-status">
+      Unable to load products. Please try again.
+    </p>
+  ) : (
+    <ProductGrid products={sortedProducts} />
+  )}
+</div>
 
       </div>
 
