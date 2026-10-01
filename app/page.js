@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ProductSection from "@/components/products/ProductSection";
 import Footer from "@/components/Footer";
+export const dynamic = "force-dynamic";
 
 async function getProducts() {
   try {
