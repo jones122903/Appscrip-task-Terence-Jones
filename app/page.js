@@ -4,15 +4,28 @@ import ProductSection from "@/components/products/ProductSection";
 import Footer from "@/components/Footer";
 
 async function getProducts() {
-  const response = await fetch(
-    "https://fakestoreapi.com/products"
-  );
+  try {
+    const response = await fetch(
+      "https://fakestoreapi.com/products"
+    );
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch products");
+    if (!response.ok) {
+      console.error(
+        `Fake Store API returned ${response.status}`
+      );
+
+      return [];
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error(
+      "Failed to fetch products:",
+      error
+    );
+
+    return [];
   }
-
-  return response.json();
 }
 
 export default async function Home() {
